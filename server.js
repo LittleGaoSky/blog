@@ -1,5 +1,6 @@
 let express = require('express');
-let session = require('express-session')
+let session = require('express-session');
+let flash = require('connect-flash');// 这是一个消息中间件
 let path = require('path');
 let bodyParser = require('body-parser');
 let index = require('./routes/index');// 首页的路由中间件
@@ -25,10 +26,16 @@ app.use(session({
     secret: 'abcd'
 }));
 
-//此中间件用来给模板的公共变量赋值
+//使用此中间件后，req会增加一个属性，写入一个消息req.flash(type,msg), 读取一个消息，并且销毁消息（只能读取一次）req.flash(type)
+app.use(flash());
+
+// 此中间件用来给模板的公共变量赋值
 app.use(function (req,res,next) {
-    //把session中的user属性取出赋给模板
+    // 把session中的user属性取出赋给模板
     res.locals.user = req.session.user;
+    // req.flash('success')取出来是一个数组，对象不能直接中模板里渲染
+    res.locals.success = req.flash('success').toString();
+    res.locals.error = req.flash('error').toString();
     next();
 })
 
