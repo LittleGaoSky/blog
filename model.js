@@ -6,7 +6,8 @@ let conn = mongoose.createConnection('mongodb://127.0.0.1:27017/blog');
 let UserSchema = new mongoose.Schema({
     username: String,
     password: String,
-    email: String
+    email: String,
+    avatar: String
 });
 // 4.定义模型并导出模型
 exports.User = conn.model('User',UserSchema);
