@@ -1,5 +1,6 @@
 let express = require('express');
 let session = require('express-session');
+let MongoStore = require('connect-mongo')(session);
 let flash = require('connect-flash');// 这是一个消息中间件
 let path = require('path');
 let bodyParser = require('body-parser');
@@ -25,7 +26,10 @@ app.use(express.static('upload'));
 app.use(session({
     resave: true,
     saveUninitialized: true,
-    secret: 'abcd'
+    secret: 'abcd',
+    store: new MongoStore({//指定session的存放位置，服务器重启后，session也不会丢失
+        url: 'mongodb://127.0.0.1/blog'
+    })
 }));
 
 //使用此中间件后，req会增加一个属性，写入一个消息req.flash(type,msg), 读取一个消息，并且销毁消息（只能读取一次）req.flash(type)
