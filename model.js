@@ -19,7 +19,8 @@ let ArticleSchema = new mongoose.Schema({
     content: String,
     createAt: {type: Date, default: Date.now},
     // ref的是当前的外键引用的是哪个集合的主键，把那个集合的模型名称放在此处即可，严格区分大小写
-    user: {type: ObjectId, ref: 'User'}
+    user: {type: ObjectId, ref: 'User'},
+    pv: {type:Number, default: 0}
 });
 // 4.定义模型并导出模型
 exports.User = conn.model('User', UserSchema);

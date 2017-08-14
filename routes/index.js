@@ -17,7 +17,7 @@ router.get('/',function (req,res) {
             .sort({createAt: -1})
             .skip((pageNum-1)*pageSize)
             .limit(pageSize)
-            .populate('user')
+            .populate('user') // populate填充，可以把一个外键字段从ID值，变成此ID值对应的文档对象。
             .exec(function (err,articles) {
                 res.render('index',{
                     title:'首页',
