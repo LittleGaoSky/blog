@@ -38,9 +38,16 @@
                 <li><a href="/user/signin">登录</a></li>
                 <%} %>
             </ul>
+
+            <form action="/" class="navbar-form navbar-left">
+                <div class="form-group">
+                    <input value="<%=keyword%>" type="text" class="form-control" name="keyword" placeholder="请输入关键字">
+                </div>
+                <button type="submit" class="btn btn-default"><i class="glyphicon glyphicon-search"></i></button>
+            </form>
+
             <%if (user) {%>
             <ul class="nav navbar-nav navbar-right">
-
                 <li><a href="#"><img class="avatar" src="<%=user.avatar%>"></a></li>
                 <li><a href="#"><%=user.username%></a></li>
             </ul>

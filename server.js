@@ -39,9 +39,10 @@ app.use(flash());
 app.use(function (req,res,next) {
     // 把session中的user属性取出赋给模板
     res.locals.user = req.session.user;
-    // req.flash('success')取出来是一个数组，对象不能直接中模板里渲染
+    // req.flash('success')取出来是一个数组，对象数据类型不能直接在模板里渲染
     res.locals.success = req.flash('success').toString();
     res.locals.error = req.flash('error').toString();
+    res.locals.keyword = '';// 默认查询关键字为空
     next();
 })
 

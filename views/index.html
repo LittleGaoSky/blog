@@ -22,18 +22,17 @@
             <ul class="pagination">
                 <%if(pageNum>1){%>
                 <li>
-                    <a href="/?pageSize=<%=pageSize%>&&pageNum=<%=pageNum-1%>" aria-label="Previous">
+                    <a href="/?pageSize=<%=pageSize%>&&pageNum=<%=pageNum-1%>&&keyword=<%=keyword%>" aria-label="Previous">
                         <span aria-hidden="true">&laquo;</span>
                     </a>
                 </li>
                 <%}%>
-
                 <%for (let i=1; i<=totalPages; i++) {%>
-                <li class="<%=pageNum==i?'active':''%>" ><a href="/?pageSize=<%=pageSize%>&&pageNum=<%=i%>"><%=i%></a></li>
+                <li class="<%=pageNum==i?'active':''%>" ><a href="/?pageSize=<%=pageSize%>&&pageNum=<%=i%>&&keyword=<%=keyword%>"><%=i%></a></li>
                 <%}%>
                 <%if (pageNum < totalPages) {%>
                 <li>
-                    <a href="/?pageSize=<%=pageSize%>&&pageNum=<%=pageNum+1%>" aria-label="Next">
+                    <a href="/?pageSize=<%=pageSize%>&&pageNum=<%=pageNum+1%>&&keyword=<%=keyword%>" aria-label="Next">
                         <span aria-hidden="true">&raquo;</span>
                     </a>
                 </li>
