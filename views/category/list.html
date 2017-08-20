@@ -1,0 +1,33 @@
+<%include ../include/header.html%>
+<div class="row">
+    <div class="col-sm-8 col-xs-12 col-sm-offset-2">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <a href="/category/add" class="btn btn-info">增加分类</a>
+            </div>
+            <div class="panel-body">
+                <table class="table table-bordered">
+                    <thead>
+                    <tr>
+                        <th class="text-center">名称</th>
+                        <th class="text-center">操作</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                        <%categories.forEach((category)=>{%>
+                        <tr>
+                            <th class="text-center">
+                                <%=category.name%>
+                            </th>
+                            <th class="text-center">
+                                <a href="/category/delete/<%=category._id%>" class="btn btn-danger">删除</a>
+                            </th>
+                        </tr>
+                        <%})%>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<%include ../include/footer.html%>

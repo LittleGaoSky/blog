@@ -20,8 +20,13 @@ let ArticleSchema = new mongoose.Schema({
     createAt: {type: Date, default: Date.now},
     // ref的是当前的外键引用的是哪个集合的主键，把那个集合的模型名称放在此处即可，严格区分大小写
     user: {type: ObjectId, ref: 'User'},
-    pv: {type:Number, default: 0}
+    pv: {type:Number, default: 0},
+    category: {type: ObjectId, ref: 'Category'}
+});
+let CategorySchema = new mongoose.Schema({
+    name: String
 });
 // 4.定义模型并导出模型
 exports.User = conn.model('User', UserSchema);
 exports.Article = conn.model('Article', ArticleSchema);
+exports.Category = conn.model('Category', CategorySchema);

@@ -7,6 +7,7 @@ let bodyParser = require('body-parser');
 let index = require('./routes/index');// 首页的路由中间件
 let user = require('./routes/user');// 用户的路由中间件
 let article = require('./routes/article');
+let category = require('./routes/category');
 let app = express();// 执行express方法得到监听函数app
 
 // 使用bodyParser中间件，得到请求体 req.body
@@ -51,4 +52,5 @@ app.use('/',index);
 // 请求的URL路径以'/user'开头
 app.use('/user',user);
 app.use('/article',article);
+app.use('/category',category)
 app.listen(8080);
