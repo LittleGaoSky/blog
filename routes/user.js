@@ -1,3 +1,4 @@
+let crypto = require('crypto');
 let express = require('express');
 let {User} = require('../model');
 let multer = require('multer');// 此中间件仅仅是用来处理上传文件的表单的
@@ -18,6 +19,7 @@ router.post('/signup',upload.single('avatar'),function (req,res) {
             req.flash('error','此用户名已存在，请重新输入！');
             res.redirect('back');
         } else {
+            user.password = crypto.createHash('md5').update(user.password).digest('hex');
             User.create(user,function (err,doc) {
                 if (err) {
                     req.flash('error',err.toString());
@@ -29,14 +31,14 @@ router.post('/signup',upload.single('avatar'),function (req,res) {
             });
         }
     });
-
-
 });
 router.get('/signin',function (req,res) {
     res.render('user/signin',{title: '登录'});
 });
 router.post('/signin',function (req,res) {
     let user = req.body;
+    user.password = crypto.createHash('md5').update(user.password).digest('hex');
+    //查询数据库里有没有跟这个用户用户名和密码相同的用户
     User.findOne(user,function (err,doc) {
         if (err) {
             req.flash('error',err.toString());

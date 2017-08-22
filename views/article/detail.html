@@ -10,7 +10,7 @@
             </div>
 
             <div class="panel-footer">
-                <%if (user && user._id==article.user) {%>
+                <%if (user && user._id==article.user._id) {%>
                 <a class="btn btn-warning" href="/article/edit/<%=article._id%>">编辑</a>
                 <a class="btn btn-danger" href="/article/remove/<%=article._id%>">删除</a>
                 <%}else{%>
@@ -29,7 +29,7 @@
                         <img class="avatar" src="<%=comment.user.avatar%>">
                     </div>
                     <div class="media-body">
-                        <p><span class="name"><%=comment.user.username%></span><span class="time pull-right"><%=comment.createAt.toLocaleString()%></span></p>
+                        <p><span class="name <%=(comment.user._id==user._id?'current':'')%>"><%=comment.user.username%></span><span class="time pull-right"><%=comment.createAt.toLocaleString()%></span></p>
                         <p class="text"><%=comment.content%></p>
                     </div>
                 </div>
