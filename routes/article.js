@@ -24,7 +24,7 @@ router.get('/detail/:_id',function (req,res) {
     // 阅读量pv自动加1
     Article.update({_id},{$inc:{pv:1}},function (err, article) {
         Article.findById(_id)
-            .populate('comments.user')
+            .populate('comments.user  user')
             .exec(function (err, article) {// 根据文章Id查找文章的对象
                 res.render('article/detail',{title: '文章详情', article});
         });

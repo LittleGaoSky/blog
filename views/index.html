@@ -1,6 +1,12 @@
 <%include include/header.html%>
 <div class="row">
     <div class="col-sm-8 col-sm-offset-2">
+
+        <!--<div class="alert alert-block alert-info">-->
+            <!--<a class="close" data-dismiss="alert"><i class="glyphicon glyphicon-remove"></i></a><br/>-->
+            <!--<div id="motto" style="text-align: center"></div><br/>-->
+        <!--</div>-->
+
         <%articles.forEach(function(article){%>
             <div class="media">
                 <div class="media-left">
@@ -9,16 +15,15 @@
                     </a>
                 </div>
                 <div class="media-body">
-                    <h4 class="media-heading">
+                    <p class="media-heading title">
                         <a href="/article/detail/<%=article._id%>"><%=article.title%></a>
-                    </h4>
-                    <p>
+                    </p>
+                    <p class="text">
                         <%=article.content%>
                     </p>
                     <p>
-                        作者：<%=article.user.username%>
-                        发表时间:<%=article.createAt.toLocaleString()%>
-                        阅读量：<%=article.pv%>
+                        <span class="name">作者：<%=article.user.username%></span>
+                        <span class="pv pull-right">阅读量：<%=article.pv%></span>
                     </p>
                 </div>
             </div>

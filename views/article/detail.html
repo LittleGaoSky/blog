@@ -3,17 +3,21 @@
     <div class="col-md-8 col-md-offset-2">
         <div class="panel panel-default">
             <div class="panel-heading">
-                <%=article.title%>
+                <p class="title"><%=article.title%></p>
             </div>
             <div class="panel-body">
-                <%=article.content%>
+                <p class="text"><%=article.content%></p>
             </div>
-            <%if (user && user._id==article.user) {%>
+
             <div class="panel-footer">
+                <%if (user && user._id==article.user) {%>
                 <a class="btn btn-warning" href="/article/edit/<%=article._id%>">编辑</a>
                 <a class="btn btn-danger" href="/article/remove/<%=article._id%>">删除</a>
+                <%}else{%>
+                <span class="name">作者：<%=article.user.username%></span>
+                <span class="time pull-right"><%=article.createAt.toLocaleString()%></span>
+                <%}%>
             </div>
-            <%}%>
         </div>
 
         <%if(article.comments && article.comments.length){%>
@@ -25,8 +29,8 @@
                         <img class="avatar" src="<%=comment.user.avatar%>">
                     </div>
                     <div class="media-body">
-                        <p><%=comment.content%></p>
-                        <span><%=comment.createAt.toLocaleString()%></span>
+                        <p><span class="name"><%=comment.user.username%></span><span class="time pull-right"><%=comment.createAt.toLocaleString()%></span></p>
+                        <p class="text"><%=comment.content%></p>
                     </div>
                 </div>
                 <%})%>

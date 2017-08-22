@@ -22,6 +22,7 @@ app.engine('html', require('ejs').__express);
 // 参数是静态文件根目录
 app.use(express.static('node_modules'));
 app.use(express.static('upload'));
+app.use(express.static('common'));
 
 // 使用session中间件，在请求对象上增加一个req.session属性
 // req.session是当前客户端在服务器对应的会话对象
