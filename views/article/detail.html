@@ -29,7 +29,13 @@
                         <img class="avatar" src="<%=comment.user.avatar%>">
                     </div>
                     <div class="media-body">
-                        <p><span class="name <%=(comment.user._id==user._id?'current':'')%>"><%=comment.user.username%></span><span class="time pull-right"><%=comment.createAt.toLocaleString()%></span></p>
+                        <p>
+                            <%if(user){%>
+                            <span class="name <%=(comment.user._id==user._id?'current':'')%>"><%=comment.user.username%></span>
+                            <%}else{%>
+                            <span class="name"><%=comment.user.username%></span>
+                            <%}%>
+                            <span class="time pull-right"><%=comment.createAt.toLocaleString()%></span></p>
                         <p class="text"><%=comment.content%></p>
                     </div>
                 </div>
