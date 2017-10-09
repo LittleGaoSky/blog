@@ -14,8 +14,13 @@ router.post('/add',function (req,res) {
             req.flash('error',err.toString());
             res.redirect('back');
         } else {
-            req.flash('success', '发表文章成功');
-            res.redirect('/');
+            if(doc){
+                req.flash('success', '发表文章成功');
+                res.redirect('/');
+            }else {
+                req.flash('error','出了一点小故障>_<');
+                res.redirect('back');
+            }
         }
     });
 });
@@ -33,7 +38,19 @@ router.get('/detail/:_id',function (req,res) {
 router.get('/remove/:_id',function (req,res) {
     let _id = req.params._id;
     Article.remove({_id},function (err,result) {
-        res.redirect('/');
+        if (err) {
+            req.flash('error',err.toString());
+            res.redirect('back');
+        } else {
+            if(result){
+                req.flash('success', '删除成功！');
+                res.redirect('/');
+            }else {
+                req.flash('error','出了一点小故障>_<');
+                res.redirect('back');
+            }
+        }
+
     });
 });
 router.get('/edit/:_id',function (req,res) {
@@ -47,7 +64,18 @@ router.get('/edit/:_id',function (req,res) {
 router.post('/edit/:_id',function (req,res) {
     let _id = req.params._id;
     Article.update({_id}, req.body, function (err, article) {
-        res.redirect(`/article/detail/${_id}`);
+        if (err) {
+            req.flash('error',err.toString());
+            res.redirect('back');
+        } else {
+            if(article){
+                req.flash('success', '编辑成功！');
+                res.redirect(`/article/detail/${_id}`);
+            }else {
+                req.flash('error','出了一点小故障>_<');
+                res.redirect('back');
+            }
+        }
     });
 });
 module.exports=router;

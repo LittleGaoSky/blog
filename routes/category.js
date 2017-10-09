@@ -16,7 +16,18 @@ router.get('/add',function (req,res) {
 router.post('/add',function (req,res) {
     let category = req.body;
     Category.create(category,function (err,doc) {
-        res.redirect('/category/list');
+        if(err){
+            req.flash('error',err.toString());
+            res.redirect('back');
+        }else {
+            if(doc){
+                req.flash('success','成功添加了一个分类！');
+                res.redirect('/category/list');
+            }else {
+                req.flash('error','要不再试一次>_<');
+                res.redirect('back');
+            }
+        }
     });
 })
 
@@ -24,7 +35,18 @@ router.post('/add',function (req,res) {
 router.get('/delete/:_id',function (req,res) {
     let _id = req.params._id;
     Category.remove({_id},function (err,result) {
-        res.redirect('/category/list');
+        if(err){
+            req.flash('error',err.toString());
+            res.redirect('back');
+        }else {
+            if(result){
+                req.flash('success','删除了一个分类！');
+                res.redirect('/category/list');
+            }else {
+                req.flash('error','要不再试一次>_<');
+                res.redirect('back');
+            }
+        }
     })
 })
 module.exports = router;

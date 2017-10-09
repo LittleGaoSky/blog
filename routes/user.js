@@ -25,8 +25,13 @@ router.post('/signup',upload.single('avatar'),function (req,res) {
                     req.flash('error',err.toString());
                     res.redirect('back');
                 } else {
-                    req.flash('success','用户注册成功，请登录！');
-                    res.redirect('/user/signin');
+                    if(result){
+                        req.flash('success','用户注册成功，请登录！');
+                        res.redirect('/user/signin');
+                    }else {
+                        req.flash('error','出了一点小故障>_<');
+                        res.redirect('back');
+                    }
                 }
             });
         }
@@ -56,6 +61,7 @@ router.post('/signin',function (req,res) {
     });
 });
 router.get('/signout',function (req,res) {
+    req.flash('success','已退出当前用户')
     req.session.user = null;
     res.redirect('/')
 });
